@@ -1,19 +1,18 @@
-import { useEffect, useState } from 'react'
+import { Routes, Route } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import Dashboard from './pages/Dashboard'
+import Actividades from './pages/Actividades'
 
 function App() {
-  const [mensaje, setMensaje] = useState('Cargando...')
-
-  useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/ping`)
-      .then(res => res.json())
-      .then(data => setMensaje(data.mensaje))
-      .catch(() => setMensaje('❌ Error al conectar con el backend'))
-  }, [])
-
   return (
-    <div>
-      <h1>Estado del backend:</h1>
-      <p>{mensaje}</p>
+    <div className="app-container">
+      <Navbar />
+      <main className="main-content">
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/actividades" element={<Actividades />} />
+        </Routes>
+      </main>
     </div>
   )
 }

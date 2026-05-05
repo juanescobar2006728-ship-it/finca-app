@@ -2,6 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors'
 import dotenv from 'dotenv'
+import actividadesRouter from './routes/actividades.js'
 
 dotenv.config()
 
@@ -13,9 +14,7 @@ mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('✅ MongoDB conectado'))
   .catch((err) => console.error('❌ Error:', err))
 
-app.get('/api/ping', (req, res) => {
-  res.json({ mensaje: '¡Backend funcionando!' })
-})
+app.use('/api/actividades', actividadesRouter)
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => console.log(`🚀 Servidor en puerto ${PORT}`))
